@@ -1,0 +1,16 @@
+platforms/
+plugins/
+www/
+dist/
+node_modules/
+elm-stuff/
+.idea/
+repl-temp-*
+tmp/
+src/.idea/
+.idea/
+*.log
+*.swp
+*.iml
+.DS_Store
+Thumbs.db
