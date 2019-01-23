@@ -28,6 +28,9 @@ module.exports = () => ({
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      "ENV": JSON.stringify("DEV")
+    }),
 
   ],
 
@@ -43,6 +46,5 @@ module.exports = () => ({
       warnings: true,
     },
     hot: true,
-    port: 3001
   }
 });

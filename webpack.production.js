@@ -6,6 +6,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const PurifyCSSPlugin = require('purifycss-webpack');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = () => ({
   output: {
@@ -42,6 +43,9 @@ module.exports = () => ({
       // Give paths to parse for rules. These should be absolute!
       paths: glob.sync(path.join(__dirname, 'src/**/*.elm')),
       verbose: true,
+    }),
+    new webpack.DefinePlugin({
+      "ENV": JSON.stringify("PROD")
     }),
 
     // new CopyWebpackPlugin([

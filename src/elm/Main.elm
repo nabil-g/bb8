@@ -2,7 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Nav exposing (Key)
-import Model exposing (Model)
+import Model exposing (Model, State(..))
 import Update exposing (Msg(..), subscriptions, update)
 import Url exposing (Url)
 import View exposing (view)
@@ -10,11 +10,11 @@ import View exposing (view)
 
 main : Program () Model Msg
 main =
-    Browser.application { init = init, view = view, update = update, subscriptions = subscriptions, onUrlChange = always NoOp, onUrlRequest = always NoOp }
+    Browser.document { init = init, view = view, update = update, subscriptions = subscriptions }
 
 
-init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
-init _ url key =
-    ( 1
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( { state = NotConnected }
     , Cmd.none
     )
