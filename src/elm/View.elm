@@ -3,8 +3,7 @@ module View exposing (view)
 import Browser exposing (Document)
 import Element exposing (Element, FocusStyle, Length, focusStyle, none)
 import Element.Font as Font
-import Model exposing (Model)
-import Update exposing (Msg(..))
+import Model exposing (Model, Msg(..))
 
 
 view : Model -> Document Msg

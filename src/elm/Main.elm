@@ -2,8 +2,9 @@ module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Nav exposing (Key)
-import Model exposing (Model, State(..))
-import Update exposing (Msg(..), subscriptions, update)
+import Model exposing (Model, Msg(..), State(..))
+import Ports exposing (subscriptions)
+import Update exposing (update)
 import Url exposing (Url)
 import View exposing (view)
 

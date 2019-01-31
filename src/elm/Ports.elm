@@ -1,6 +1,6 @@
-port module Ports exposing (disconnect, startScan)
+port module Ports exposing (disconnect, startScan, subscriptions)
 
-import Model exposing (Device)
+import Model exposing (Device, Model, Msg(..))
 
 
 
@@ -10,7 +10,7 @@ import Model exposing (Device)
 port startScan : () -> Cmd msg
 
 
-port disconnect : String -> Cmd msg
+port disconnect : Maybe String -> Cmd msg
 
 
 port sendData : String -> Cmd msg
@@ -23,7 +23,7 @@ port sendData : String -> Cmd msg
 port scanSuccess : (Device -> msg) -> Sub msg
 
 
-port scanFailure : (Int -> msg) -> Sub msg
+port scanFailure : (() -> msg) -> Sub msg
 
 
 port connectSuccess : (Device -> msg) -> Sub msg
@@ -45,3 +45,8 @@ port sendDataFailure : (Int -> msg) -> Sub msg
 
 
 port receivedData : (() -> msg) -> Sub msg
+
+
+subscriptions : Model -> Sub Msg
+subscriptions m =
+    Sub.batch [ scanSuccess ScanSuccess ]

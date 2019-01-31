@@ -1,16 +1,35 @@
-module Model exposing (Model,State(..),Device)
+module Model exposing (Device, Model, Msg(..), State(..))
 
 
 type alias Model =
-    { state : State}
+    { state : State }
 
-type State =
-    NotConnected
+
+type State
+    = NotConnected
     | Scanning (List Device)
-    | Connected (Device)
+    | Connected Device
+
 
 type alias Device =
     { name : String
     , address : String
     , rssi : String
     }
+
+
+type Msg
+    = NoOp
+    | StartScan
+    | Disconnect (Maybe String)
+    | ScanSuccess Device
+    | ScanFailure
+    | ConnectTo String
+    | ConnectSuccess
+    | ConnectFailure
+    | ServiceSuccess
+    | ServiceFailure
+    | SendData
+    | SendDataSuccess
+    | SendDataFailure
+    | ReceivedData
