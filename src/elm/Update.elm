@@ -11,7 +11,7 @@ update msg model =
             ( model, Cmd.none )
 
         StartScan ->
-            ( { model | state = NotConnected }, Ports.startScan () )
+            ( { model | state = Scanning [] }, Ports.startScan () )
 
         Disconnect errorString ->
             ( { model | state = NotConnected }, Ports.disconnect errorString )
@@ -28,8 +28,26 @@ update msg model =
             in
             ( { model | state = Scanning newList }, Cmd.none )
 
-        ScanFailure ->
-            update (Disconnect <| Just "Failed to scan for devices.") model
+        ScanFailure errorMsg ->
+            update (Disconnect errorMsg) model
 
-        _ ->
+        ConnectTo address ->
+            ( model, Ports.connectTo address )
+
+        ConnectFailure errorMsg ->
+            update (Disconnect errorMsg) model
+
+        ServiceSuccess device ->
+            ( { model | state = Connected device }, Cmd.none )
+
+        ServiceFailure errorMsg ->
+            update (Disconnect errorMsg) model
+
+        SendData data ->
+            ( model, Ports.sendData data )
+
+        SendDataFailure errorMsg ->
+            update (Disconnect errorMsg) model
+
+        ReceivedData _ ->
             ( model, Cmd.none )

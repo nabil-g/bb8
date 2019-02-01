@@ -13,9 +13,13 @@ type State
 
 type alias Device =
     { name : String
-    , address : String
+    , address : Address
     , rssi : String
     }
+
+
+type alias Address =
+    String
 
 
 type Msg
@@ -23,13 +27,11 @@ type Msg
     | StartScan
     | Disconnect (Maybe String)
     | ScanSuccess Device
-    | ScanFailure
-    | ConnectTo String
-    | ConnectSuccess
-    | ConnectFailure
-    | ServiceSuccess
-    | ServiceFailure
-    | SendData
-    | SendDataSuccess
-    | SendDataFailure
-    | ReceivedData
+    | ScanFailure (Maybe String)
+    | ConnectTo Address
+    | ConnectFailure (Maybe String)
+    | ServiceSuccess Device
+    | ServiceFailure (Maybe String)
+    | SendData String
+    | SendDataFailure (Maybe String)
+    | ReceivedData String

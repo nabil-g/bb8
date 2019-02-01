@@ -1,4 +1,4 @@
-port module Ports exposing (disconnect, startScan, subscriptions)
+port module Ports exposing (connectFailure, connectTo, disconnect, receivedData, scanFailure, scanSuccess, sendData, sendDataFailure, serviceFailure, serviceSuccess, startScan, subscriptions)
 
 import Model exposing (Device, Model, Msg(..))
 
@@ -16,6 +16,9 @@ port disconnect : Maybe String -> Cmd msg
 port sendData : String -> Cmd msg
 
 
+port connectTo : String -> Cmd msg
+
+
 
 -- INCOMING
 
@@ -23,30 +26,31 @@ port sendData : String -> Cmd msg
 port scanSuccess : (Device -> msg) -> Sub msg
 
 
-port scanFailure : (() -> msg) -> Sub msg
+port scanFailure : (Maybe String -> msg) -> Sub msg
 
 
-port connectSuccess : (Device -> msg) -> Sub msg
-
-
-port connectFailure : (Int -> msg) -> Sub msg
+port connectFailure : (Maybe String -> msg) -> Sub msg
 
 
 port serviceSuccess : (Device -> msg) -> Sub msg
 
 
-port serviceFailure : (Int -> msg) -> Sub msg
+port serviceFailure : (Maybe String -> msg) -> Sub msg
 
 
-port sendDataSuccess : (() -> msg) -> Sub msg
+port sendDataFailure : (Maybe String -> msg) -> Sub msg
 
 
-port sendDataFailure : (Int -> msg) -> Sub msg
-
-
-port receivedData : (() -> msg) -> Sub msg
+port receivedData : (String -> msg) -> Sub msg
 
 
 subscriptions : Model -> Sub Msg
 subscriptions m =
-    Sub.batch [ scanSuccess ScanSuccess ]
+    Sub.batch
+        [ scanSuccess ScanSuccess
+        , scanFailure ScanFailure
+        , connectFailure ConnectFailure
+        , serviceFailure ServiceFailure
+        , sendDataFailure SendDataFailure
+        , receivedData ReceivedData
+        ]
