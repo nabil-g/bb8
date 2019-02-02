@@ -14,6 +14,8 @@ const DFRBLU_TX_UUID_DESCRIPTOR = "00002902-0000-1000-8000-00805f9b34fb";
 
 if (env === "DEV") {
   initialize();
+} else {
+  document.addEventListener("deviceready", initialize);
 }
 
 function initialize() {

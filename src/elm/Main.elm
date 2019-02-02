@@ -19,3 +19,25 @@ init _ =
     ( { state = NotConnected }
     , Cmd.none
     )
+
+
+
+{- devices =
+   [ { name = "Avion"
+     , address = "Gateau"
+     , rssi = "dsdsdsd"
+     }
+   , { name = "Avion"
+     , address = "Gateau"
+     , rssi = "dsdsdsd"
+     }
+   , { name = "Avion"
+     , address = "Gateau"
+     , rssi = "dsdsdsd"
+     }
+   , { name = "Avion"
+     , address = "Gateau"
+     , rssi = "dsdsdsd"
+     }
+   ]
+-}
