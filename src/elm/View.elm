@@ -1,7 +1,7 @@
 module View exposing (view)
 
 import Browser exposing (Document)
-import Element exposing (..)
+import Element exposing (Color, Element, FocusStyle, alignRight, centerX, centerY, column, el, fill, focusStyle, height, none, padding, px, rgb255, row, spaceEvenly, spacing, text, width)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Events exposing (onClick)
@@ -31,7 +31,10 @@ viewMain { state } =
 
                 Scanning devicesList ->
                     column [ width fill, spacing 15 ]
-                        [ el [ centerX, Font.bold, Font.size 20 ] <| text "Scanning ..."
+                        [ row [ width fill, centerY ]
+                            [ el [ Font.bold, Font.size 20 ] <| text "Scanning ..."
+                            , el [ onClick <| Disconnect Nothing, width <| px 30, height <| px 30, padding 5, alignRight, Font.color <| rgb255 255 255 255, Background.color <| rgb255 255 0 0 ] <| el [ centerX, centerY ] <| text "X"
+                            ]
                         , Keyed.column [ width fill, spacing 10 ] <| List.map viewDevice devicesList
                         ]
 
